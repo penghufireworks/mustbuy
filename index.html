@@ -1,8 +1,24 @@
-1. 核心大標題（主要關鍵字）
-如果你在架設網站或寫文章，標題應包含這幾個詞：
-
-Best Souvenirs from Penghu (最推薦的澎湖伴手禮)
-
-Must-buy Penghu Specialty Products (必買澎湖特產)
-
-Famous Penghu Local Delicacies (著名的澎湖在地美食)
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Trae Project</title>
+    <script type="module">
+      if (import.meta.hot?.on) {
+        import.meta.hot.on('vite:error', (error) => {
+          if (error.err) {
+            console.error(
+              [error.err.message, error.err.frame].filter(Boolean).join('\n'),
+            )
+          }
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -19,6 +19,7 @@
 - `package.json` - 專案設定與相依套件（已配置 GitHub Pages 和自定義網域）
 - `vite.config.ts` - Vite 建構工具設定（已配置 base: './'）
 - `tsconfig.json` - TypeScript 設定
+- `tsconfig.node.json` - Node.js TypeScript 設定
 - `tailwind.config.js` - Tailwind CSS 設定
 - `postcss.config.js` - PostCSS 設定
 - `eslint.config.js` - ESLint 設定
@@ -29,11 +30,12 @@
 #### 📁 部署相關
 - `README.md` - 專案說明文件（包含部署步驟）
 - `DEPLOYMENT_GUIDE.md` - 詳細部署說明書（含自定義網域設定）
+- `PACKAGE_CONTENTS.md` - 打包內容說明
 - `vercel.json` - Vercel 部署設定（SPA 路由支援）
 - `.gitignore` - Git 忽略檔案清單
 
 #### 📁 靜態資源
-- `public/` - 靜態檔案（圖示等）
+- `favicon.svg` - 澎湖主題網站圖示
 - `index.html` - 主頁面（已修復相對路徑）
 
 ## 🚀 快速開始 - 部署到自定義網域

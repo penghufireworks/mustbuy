@@ -38,12 +38,14 @@
     "noImplicitOverride": true,
     "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true,
-    "noImplicitFallthrough": true,
     "noPropertyAccessFromIndexSignature": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"]
 }

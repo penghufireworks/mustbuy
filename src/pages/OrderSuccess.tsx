@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { CheckCircle, MapPin, Calendar, Clock, QrCode } from 'lucide-react';
 import { PickupMapModal } from '../components/checkout/PickupMapModal';
 
@@ -7,7 +7,6 @@ export const OrderSuccess: React.FC = () => {
   const [isMapOpen, setIsMapOpen] = useState(false);
   
   // Mock order data
-  const orderId = 'ORD-' + Math.floor(Math.random() * 1000000);
   const pickupCode = 'A' + Math.floor(Math.random() * 10000);
   
   return (

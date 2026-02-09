@@ -23,6 +23,7 @@ export const SMSVerification: React.FC<SMSVerificationProps> = ({ phone, onVerif
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [timeLeft, isSent]);
 
   const handleSendOtp = () => {

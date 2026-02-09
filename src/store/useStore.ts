@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Product, CartItem, PickupType, CustomerInfo, Order } from '../types';
+import { Product, CartItem, PickupType, CustomerInfo } from '../types';
 import { mockProducts } from '../services/mockData';
 
 interface AppState {

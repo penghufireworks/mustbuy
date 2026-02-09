@@ -16,7 +16,7 @@
   - `types/` - TypeScript 型別定義
 
 #### 📁 設定檔案
-- `package.json` - 專案設定與相依套件（已配置 GitHub Pages）
+- `package.json` - 專案設定與相依套件（已配置 GitHub Pages 和自定義網域）
 - `vite.config.ts` - Vite 建構工具設定（已配置 base: './'）
 - `tsconfig.json` - TypeScript 設定
 - `tailwind.config.js` - Tailwind CSS 設定
@@ -24,11 +24,11 @@
 - `eslint.config.js` - ESLint 設定
 
 #### 📁 GitHub Actions 配置
-- `.github/workflows/deploy.yml` - 自動部署到 GitHub Pages 的工作流程
+- `.github/workflows/deploy.yml` - 自動部署到 GitHub Pages 的工作流程（含自定義網域支援）
 
 #### 📁 部署相關
 - `README.md` - 專案說明文件（包含部署步驟）
-- `DEPLOYMENT_GUIDE.md` - 詳細部署說明書
+- `DEPLOYMENT_GUIDE.md` - 詳細部署說明書（含自定義網域設定）
 - `vercel.json` - Vercel 部署設定（SPA 路由支援）
 - `.gitignore` - Git 忽略檔案清單
 
@@ -36,7 +36,7 @@
 - `public/` - 靜態檔案（圖示等）
 - `index.html` - 主頁面（已修復相對路徑）
 
-## 🚀 快速開始
+## 🚀 快速開始 - 部署到自定義網域
 
 ### 1. 直接上傳到 GitHub
 將 `OK/` 資料夾內的所有檔案上傳到新的 GitHub 儲存庫
@@ -44,10 +44,33 @@
 ### 2. GitHub Actions 會自動
 - 安裝相依套件
 - 建構專案
+- 創建 CNAME 檔案指向 `penghu.shop`
 - 部署到 GitHub Pages
 
-### 3. 訪問網址
-`https://[your-username].github.io/[repo-name]`
+### 3. DNS 設定（重要！）
+在你的網域註冊商設定 DNS：
+
+#### A 記錄（推薦）
+```
+Type: A
+Name: @
+Value: 185.199.108.153
+
+Type: A
+Name: @
+Value: 185.199.109.153
+
+Type: A
+Name: @
+Value: 185.199.110.153
+
+Type: A
+Name: @
+Value: 185.199.111.153
+```
+
+### 4. 訪問網址
+`https://penghu.shop/`
 
 ## 📋 功能特色
 
@@ -68,6 +91,7 @@
 - 相對路徑修復
 - 自動部署配置
 - SPA 路由支援
+- 自定義網域支援
 
 ## 🔧 技術堆疊
 
@@ -84,6 +108,10 @@
 - 修復了 `/favicon.svg` 的 404 錯誤
 - 所有資源使用相對路徑 `./`
 
+✅ **自定義網域支援**
+- GitHub Actions 自動創建 CNAME 檔案
+- 已配置支援 `https://penghu.shop/`
+
 ✅ **自動部署**
 - GitHub Actions 工作流程已配置
 - 推送到 main 分支即自動部署
@@ -93,16 +121,17 @@
 
 如需協助，請參考：
 - `README.md` - 專案基本說明與部署步驟
-- `DEPLOYMENT_GUIDE.md` - 詳細部署說明
+- `DEPLOYMENT_GUIDE.md` - 詳細部署說明（含 DNS 設定）
 
 ## ⚠️ 重要提醒
 
 - 本專案目前使用模擬資料
 - 電話號碼已移除預設值，需自行填寫
 - GitHub Actions 會自動處理建構和部署
+- DNS 設定需要 24-48 小時生效
 - 確保 GitHub Pages 設定為從 GitHub Actions 部署
 
 ---
 
 **檔案建立時間**: 2026年2月9日
-**版本**: 1.0.0 - GitHub Pages 優化版
+**版本**: 1.0.0 - 自定義網域優化版

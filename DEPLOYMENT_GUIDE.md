@@ -1,125 +1,146 @@
-# 部署說明書
+# 澎湖特產電商平台 - 詳細部署說明書
 
-## 專案概述
-這是一個澎湖特產電商平台，使用 React+TypeScript+Vite 開發，支援多種取貨方式。
+## 🎯 目標
+將澎湖特產電商平台部署到自定義網域 `https://penghu.shop/`
 
-## 🚀 快速部署到 GitHub Pages
+## 📋 部署前準備
 
-### 步驟 1：建立 GitHub 儲存庫
-1. 前往 GitHub 並登入
-2. 點擊 "New repository"
-3. 命名儲存庫（例如：penghu-ecommerce）
-4. 設定為 Public
-5. 不要初始化 README（因為我們已有檔案）
+### 必要條件
+1. GitHub 帳號
+2. 已購買的網域 `penghu.shop`
+3. 將 `OK/` 資料夾內的所有檔案上傳到 GitHub
 
-### 步驟 2：上傳檔案
-將 `OK/` 資料夾內的所有檔案上傳到 GitHub：
+## 🚀 步驟一：GitHub 設定
 
+### 1. 建立新的 GitHub 儲存庫
+- 登入 GitHub
+- 點擊 "New repository"
+- 命名為 `penghu-ecommerce`（或其他你喜歡的名稱）
+- 設定為 Public
+- 不要初始化 README
+
+### 2. 上傳檔案到 GitHub
+將 `OK/` 資料夾內的所有檔案上傳到新建立的儲存庫：
 ```bash
-cd OK
-git init
+git clone https://github.com/[你的用戶名]/[儲存庫名稱].git
+cd [儲存庫名稱]
+# 將 OK 資料夾內的所有檔案複製到此目錄
 git add .
 git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/penghu-ecommerce.git
-git push -u origin main
+git push origin main
 ```
 
-### 步驟 3：啟用 GitHub Pages
-1. 在儲存庫頁面，點擊 "Settings"
-2. 捲動到 "Pages" 部分
-3. 在 "Source" 下，選擇 "Deploy from a branch"
-4. 選擇 "main" 分支和 "/ (root)" 資料夾
-5. 點擊 "Save"
+## 🔧 步驟二：GitHub Pages 設定
 
-### 步驟 4：建立 GitHub Actions（自動部署）
-在儲存庫中建立 `.github/workflows/deploy.yml`：
+### 1. 啟用 GitHub Pages
+- 進入儲存庫的 Settings
+- 滾動到 "Pages" 部分
+- Source 選擇 "GitHub Actions"
 
-```yaml
-name: Deploy to GitHub Pages
+### 2. 確認工作流程
+- 確認 `.github/workflows/deploy.yml` 已存在
+- 此檔案會自動創建 CNAME 檔案指向 `penghu.shop`
 
-on:
-  push:
-    branches: [ main ]
+## 🌐 步驟三：網域設定
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          
-      - name: Install dependencies
-        run: npm install
-        
-      - name: Build
-        run: npm run build
-        
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+### 1. DNS 設定（重要！）
+在你的網域註冊商（購買網域的地方）設定 DNS：
+
+#### 方法一：A 記錄（推薦）
+```
+Type: A
+Name: @
+Value: 185.199.108.153
+
+Type: A
+Name: @
+Value: 185.199.109.153
+
+Type: A
+Name: @
+Value: 185.199.110.153
+
+Type: A
+Name: @
+Value: 185.199.111.153
 ```
 
-## 🔧 其他部署選項
-
-### Vercel（推薦）
-1. 前往 [vercel.com](https://vercel.com)
-2. 使用 GitHub 登入
-3. 匯入儲存庫
-4. 建構設定：
-   - Framework: Vite
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-
-### Netlify
-1. 前往 [netlify.com](https://netlify.com)
-2. 拖曳 `dist` 資料夾到部署區域
-3. 或連接 GitHub 自動部署
-
-## 📁 檔案結構說明
-
+#### 方法二：CNAME 記錄
 ```
-OK/
-├── src/                    # React 應用程式原始碼
-│   ├── components/         # 可重複使用元件
-│   ├── pages/              # 頁面元件
-│   ├── store/              # 狀態管理
-│   └── types/              # TypeScript 型別
-├── public/                 # 靜態資源
-├── package.json            # 專案設定
-├── vite.config.ts          # Vite 設定（已配置 GitHub Pages）
-├── index.html              # 主頁面（已修復路徑）
-└── README.md               # 專案說明
+Type: CNAME
+Name: www
+Value: [你的用戶名].github.io
 ```
 
-## ⚠️ 重要設定
+### 2. 等待 DNS 生效
+DNS 變更可能需要 24-48 小時才能完全生效。
 
-### 已修復的 GitHub Pages 相容性問題：
-1. **相對路徑**：所有資源使用 `./` 而非 `/`
-2. **Vite 設定**：`base: './'` 設定
-3. **檔案結構**：優化的建構輸出
+## ✅ 步驟四：驗證部署
 
-### 環境需求：
-- Node.js 18+
-- npm 或 yarn
+### 1. 檢查 GitHub Actions
+- 進入儲存庫的 "Actions" 標籤
+- 確認工作流程執行成功（綠色勾勾）
 
-## 🌐 部署後網址
+### 2. 檢查網站
+- 訪問 `https://penghu.shop/`
+- 確認網站正常載入
 
-- GitHub Pages: `https://[your-username].github.io/[repo-name]`
-- Vercel: 自動產生網址
-- Netlify: 自動產生網址
+## 🔍 常見問題排解
 
-## 📞 支援
+### ❌ main.tsx MIME 類型錯誤
+**原因**：GitHub Pages 無法正確提供 TypeScript 檔案  
+**解決**：GitHub Actions 會自動建構專案，確保使用編譯後的 JavaScript 檔案
 
-如有部署問題：
-1. 檢查 GitHub Pages 設定
-2. 確認檔案已正確上傳
-3. 查看 GitHub Actions 日誌（如使用自動部署）
-4. 參考 vite.config.ts 中的 base 設定
+### ❌ favicon.svg 404 錯誤
+**原因**：檔案路徑錯誤  
+**解決**：已修復為相對路徑 `./favicon.svg`
+
+### ❌ 空白頁面
+**原因**：路由或路徑問題  
+**解決**：已配置 `base: './'` 和 SPA 路由支援
+
+### ❌ 自定義網域無效
+**原因**：DNS 設定錯誤或尚未生效  
+**解決**：
+1. 確認 DNS 設定正確
+2. 等待 24-48 小時
+3. 檢查 GitHub Pages 設定中的自訂網域部分
+
+## 📁 重要檔案說明
+
+### GitHub Actions 配置
+`.github/workflows/deploy.yml`：
+- 自動建構 React 應用程式
+- 創建 CNAME 檔案指向 `penghu.shop`
+- 部署到 GitHub Pages
+
+### Vite 配置
+`vite.config.ts`：
+- 設定相對路徑 `base: './'`
+- 優化建構輸出
+
+### Package 配置
+`package.json`：
+- 設定 `homepage: "https://penghu.shop"`
+- 包含部署腳本
+
+## 🎉 成功指標
+
+✅ **部署成功確認**：
+- GitHub Actions 顯示綠色勾勾
+- 訪問 `https://penghu.shop/` 看到網站
+- 所有頁面正常載入
+- 購物車和結帳功能正常
+
+## 📞 技術支援
+
+如果遇到問題：
+1. 檢查 GitHub Actions 日誌
+2. 確認 DNS 設定
+3. 檢查所有設定檔是否正確
+4. 等待 DNS 生效（最多 48 小時）
+
+---
+
+**最後更新**：2026年2月9日  
+**版本**：1.0.0

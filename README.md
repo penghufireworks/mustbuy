@@ -1,108 +1,35 @@
 # 澎湖特產電商平台
 
+這是一個專為澎湖特產設計的電商平台，支援多種取貨方式，包括機場取貨、港口取貨、超商取貨和宅配服務。
+
 ## 🚀 快速開始
 
-### 安裝相依套件
+### 本地開發
 ```bash
 npm install
-```
-
-### 啟動開發伺服器
-```bash
 npm run dev
 ```
 
-### 建構生產版本
+### 建構專案
 ```bash
 npm run build
 ```
 
-### 預覽建構結果
+### 部署到 GitHub Pages
 ```bash
-npm run preview
+npm run deploy
 ```
 
-## 📦 部署到 GitHub Pages
+## 📋 功能特色
 
-### 1. 推送到 GitHub
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git push -u origin main
-```
-
-### 2. 設定 GitHub Pages
-1. 前往 GitHub 儲存庫設定
-2. 找到 "Pages" 選項
-3. 選擇部署來源為 "GitHub Actions"
-
-### 3. 建立 GitHub Actions 工作流程
-在 `.github/workflows/deploy.yml` 加入：
-
-```yaml
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build
-        run: npm run build
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
-      
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-## 📝 專案特色
-
-- ✅ 完整電商功能（商品瀏覽、購物車、結帳）
+- ✅ 商品瀏覽與購物車
 - ✅ 多種取貨方式（機場、港口、超商、宅配）
-- ✅ 響應式設計，支援手機平板
-- ✅ TypeScript 支援，完整型別定義
-- ✅ 模擬資料，無需後端即可運行
+- ✅ 結帳流程與訂單管理
+- ✅ 響應式設計（手機、平板、電腦）
+- ✅ TypeScript 支援
+- ✅ GitHub Pages 優化
 
-## 🔧 技術堆疊
+## 🎯 技術堆疊
 
 - **前端**: React 18 + TypeScript
 - **建構工具**: Vite
@@ -110,26 +37,41 @@ jobs:
 - **狀態管理**: Zustand
 - **路由**: React Router DOM
 
+## 🌐 部署說明
+
+### GitHub Pages 部署
+1. 將專案上傳到 GitHub
+2. 確保 GitHub Pages 設定為從 GitHub Actions 部署
+3. 推送到 `main` 分支會自動觸發部署
+
+### 自定義網域設定
+- 已配置支援 `https://penghu.shop/`
+- GitHub Actions 會自動創建 CNAME 檔案
+
 ## 📁 專案結構
 
 ```
-OK/
-├── src/
-│   ├── components/     # 可重複使用元件
-│   ├── pages/         # 頁面元件
-│   ├── store/         # 狀態管理
-│   ├── services/      # API 服務
-│   └── types/         # TypeScript 型別
-├── public/            # 靜態資源
-├── package.json       # 專案設定
-├── vite.config.ts     # Vite 設定
-└── README.md         # 專案說明
+src/
+├── pages/          # 頁面元件
+├── components/     # 可重複使用元件
+├── store/          # 狀態管理
+├── services/       # API 服務
+├── types/          # TypeScript 型別定義
+└── assets/         # 靜態資源
 ```
 
-## 🌐 線上示範
+## 🔧 設定檔案
 
-部署後可透過 `https://[your-username].github.io/[repo-name]` 存取
+- `vite.config.ts` - Vite 建構工具設定
+- `tailwind.config.js` - Tailwind CSS 設定
+- `tsconfig.json` - TypeScript 設定
+- `.github/workflows/deploy.yml` - GitHub Actions 部署流程
 
-## 📞 支援
+## 📞 聯絡資訊
 
-如有問題，請參考 `DEPLOYMENT_GUIDE.md` 或建立 Issue
+如需技術支援，請透過 GitHub Issues 聯絡。
+
+---
+
+**版本**: 1.0.0  
+**更新日期**: 2026年2月9日
